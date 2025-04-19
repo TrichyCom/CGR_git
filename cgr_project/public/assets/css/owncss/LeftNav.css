@@ -1,0 +1,16 @@
+.leftnavmenutext{
+    color: #C9D931;
+    font-weight:900;
+}
+.leftnavmenubg{
+    /* background-color: #1A5D99; */
+    background-color:  #1A5D99;
+    border: #C9D931 solid 3px;
+}
+.navbg
+{
+    background-color: #1A5D99;
+}
+.adminname{
+    background-color: #f0fe7381;
+}

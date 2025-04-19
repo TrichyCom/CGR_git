@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+.dropdown {
+    position: relative;
+    display: block;
+  }
+  .dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .dropdown-menu-open {
+    max-height: 200px;
+    transition: all 0.3s ease;
+  }
+  .dropdown-content {
+    font-weight: 400;
+    color: gray;
+    display: none;
+    position: fixed;
+    top: 30px;
+    background-color:rgba(255, 255, 255, 0.116);
+    backdrop-filter: blur(6px);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 10px 10px;
+    border-radius: 2px;
+  }
+  .lang {
+    font-size: 13px;
+    text-decoration: none;
+    width: 100%;
+    color:white;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+    
+  }
+  .menu-item2 {
+    display: none;
+  }
+
+  #language{
+    position: fixed;
+    top: 40px;
+    right: 260px;
+  }
+  #calender-drop{
+    position: fixed;
+    top: 40px;
+    right: 140px;
+  }
+  #message-drop{
+    position: fixed;
+    top: 40px;
+    right: 100px;
+  }
+  #system-drop{
+    position: fixed;
+    top: 40px;
+    right: 80px;
+  }
+  #notice-drop{
+    position: fixed;
+    top: 40px;
+    right: 70px;
+  }
