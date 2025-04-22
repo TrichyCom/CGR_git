@@ -11,8 +11,9 @@ function WorkerMngRight() {
   // axios
   // .get("http://localhost:3001/workers")
   useEffect(() => {
+    const apiUrl = import.meta.env.VITE_API_URL; 
       axios
-      .get(`${process.env.REACT_APP_API_URL}/workers`)
+      .get(`${apiUrl}/workers`)
       .then((response) => {
         setWorkers(response.data);
       })
@@ -22,8 +23,9 @@ function WorkerMngRight() {
   }, []);
 
   const handleView = (finNo) => {
+    const apiUrl = import.meta.env.VITE_API_URL; 
     axios
-      .get(`${process.env.REACT_APP_API_URL}/workers/${finNo}`)
+      .get(`${apiUrl}/workers/${finNo}`)
       .then((response) => {
         navigate("/viewworkerdata", { state: { worker: response.data } });
       })

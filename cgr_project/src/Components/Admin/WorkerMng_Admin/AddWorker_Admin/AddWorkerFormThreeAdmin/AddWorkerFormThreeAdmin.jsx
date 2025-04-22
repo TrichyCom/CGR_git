@@ -41,7 +41,8 @@ const AddWorkerFormThreeAdmin = () => {
   // Fetch data function
   const fetchData = () => {
     if (formData.FinNo) {
-      axios.get(`${process.env.REACT_APP_API_URL}/certificates/${formData.FinNo}`)
+      const apiUrl = import.meta.env.VITE_API_URL;
+      axios.get(`${apiUrl}/certificates/${formData.FinNo}`)
         .then((response) => {
           setCertificateData(response.data);
         })
@@ -123,7 +124,8 @@ if (newData.Expiry) {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/certificates/${id}`);
+      const apiUrl = import.meta.env.VITE_API_URL;
+      await axios.delete(`${apiUrl}/certificates/${id}`);
       setCertificateData(certificateData.filter((cert) => cert.Id !== id));
     } catch (error) {
       console.error("Error deleting certificate:", error);
@@ -255,7 +257,8 @@ if (newData.Expiry) {
     formDataToSend.append("data", JSON.stringify(allWorkerData));
   
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/addworker`, formDataToSend, {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const res = await axios.post(`${apiUrl}/addworker`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -327,7 +330,8 @@ if (newData.Expiry) {
     }
 
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/certificates`, formDataToSend, {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      await axios.post(`${apiUrl}/certificates`, formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -475,7 +479,8 @@ useEffect(() => {
 
 const fetchEducationData = async (finNo) => {
   try {
-    const response = await axios.get(`${process.env.REACT_APP_API_URL}/education/${finNo}`);
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const response = await axios.get(`${apiUrl}/education/${finNo}`);
     setEducation(response.data);
   } catch (error) {
     console.error("Error fetching education data:", error);
@@ -503,8 +508,9 @@ const UploadEducation = async (e) => {
   formDataToSend.append("EducationFile", selectedFile);
 
   try {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/upload-education`,
+      `${apiUrl}/upload-education`,
       formDataToSend,
       { headers: { "Content-Type": "multipart/form-data" } }
     );
@@ -531,7 +537,8 @@ const UploadEducation = async (e) => {
     // if (!window.confirm("Are you sure you want to delete this record?")) return;
 
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/education/${id}`);
+      const apiUrl = import.meta.env.VITE_API_URL;
+      await axios.delete(`${apiUrl}/education/${id}`);
       setEducation(education.filter((edu) => edu.Id !== id));
       // alert("Education record deleted successfully!");
       setTopAlert({ show: true, message: "Education record deleted successfully!" });
@@ -550,7 +557,8 @@ useEffect(() => {
 
 const fetchCertificates = async () => {
   try {
-    const response = await axios.get(`${process.env.REACT_APP_API_URL}/getcertificates`);
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const response = await axios.get(`${apiUrl}/getcertificates`);
     setCertificates(response.data); // Store fetched data in state
   } catch (error) {
     console.error("Error fetching certificates:", error);

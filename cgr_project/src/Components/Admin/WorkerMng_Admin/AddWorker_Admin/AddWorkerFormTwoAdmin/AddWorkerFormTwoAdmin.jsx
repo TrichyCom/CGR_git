@@ -109,8 +109,9 @@ const [topAlert, setTopAlert] = useState({ show: false, message: "" });
       });
   
       try {
+        const apiUrl = import.meta.env.VITE_API_URL;
           const response = await axios.post(
-              `${process.env.REACT_APP_API_URL}/workerreportfiles`,
+              `${apiUrl}/workerreportfiles`,
               formDataToSend,
               { headers: { "Content-Type": "multipart/form-data" } }
           );

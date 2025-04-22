@@ -20,8 +20,9 @@ const AddWorkerFormOneAdmin = () => {
   }, []);
 
   const fetchRoles = async () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/feilds`); // Replace with your API URL
+      const response = await axios.get(`${apiUrl}/feilds`); // Replace with your API URL
       const roleNames = response.data.map((item) => item.Feilds); // Extract Feilds column
       setRoles(roleNames);
     } catch (error) {
@@ -144,8 +145,9 @@ const AddWorkerFormOneAdmin = () => {
 
   // Fetch roles from the database
   const fetchRoless = async () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/roles`); // Replace with your API URL
+      const response = await axios.get(`${apiUrl}/roles`); // Replace with your API URL
       setRoless(response.data);
     } catch (error) {
       console.error("Error fetching roles:", error);
@@ -159,8 +161,9 @@ const AddWorkerFormOneAdmin = () => {
   const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     axios
-      .get(`${process.env.REACT_APP_API_URL}/departments`) // Update the API endpoint based on your backend route
+      .get(`${apiUrl}/departments`) // Update the API endpoint based on your backend route
       .then((response) => {
         setDepartments(response.data);
       })
@@ -197,7 +200,8 @@ const AddWorkerFormOneAdmin = () => {
    const [companyOptions, setCompanyOptions] = useState([]);
 
    useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/getCompanies`)
+    const apiUrl = import.meta.env.VITE_API_URL;
+    axios.get(`${apiUrl}/getCompanies`)
       .then((res) => setCompanyOptions(res.data))
       .catch((err) => console.error(err));
   }, []);

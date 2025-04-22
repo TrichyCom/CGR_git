@@ -12,8 +12,9 @@ const AddOptions = () => {
   }, []);
 
   const fetchFields = async () => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     try {
-      const response = await axios.get("http://localhost:3001/feilds"); // Replace with your API URL
+      const response = await axios.get(`${apiUrl}/feilds`); // Replace with your API URL
       setFields(response.data);
     } catch (error) {
       console.error("Error fetching fields:", error);
@@ -23,9 +24,9 @@ const AddOptions = () => {
   // Add new field
   const handleAddField = async () => {
     if (newField.trim() === "") return; // Prevent empty values
-
+    const apiUrl = import.meta.env.VITE_API_URL;
     try {
-      const response = await axios.post("http://localhost:3001/feilds", {
+      const response = await axios.post(`${apiUrl}/feilds`, {
         Feilds: newField,
       });
 
@@ -38,8 +39,9 @@ const AddOptions = () => {
 
   // Delete field
   const handleDeleteField = async (id) => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     try {
-      await axios.delete(`http://localhost:3001/feilds/${id}`);
+      await axios.delete(`${apiUrl}/feilds/${id}`);
       setFields(fields.filter((field) => field.id !== id)); // Remove from UI
     } catch (error) {
       console.error("Error deleting field:", error);
@@ -106,8 +108,9 @@ useEffect(() => {
 
 // Fetch department data from backend
 const fetchDepartments = async () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   try {
-    const response = await axios.get("http://localhost:3001/departments");
+    const response = await axios.get(`${apiUrl}/departments`);
     setDepartments(response.data);
   } catch (error) {
     console.error("Error fetching departments:", error);
@@ -117,9 +120,9 @@ const fetchDepartments = async () => {
 // Add new department
 const handleAddDepartment = async () => {
   if (!newDepartment.trim()) return; // Prevent empty input submission
-
+  const apiUrl = import.meta.env.VITE_API_URL;
   try {
-    await axios.post("http://localhost:3001/departments", {
+    await axios.post(`${apiUrl}/departments`, {
       Department: newDepartment,
     });
     setNewDepartment(""); // Clear input field
@@ -131,8 +134,9 @@ const handleAddDepartment = async () => {
 
 // Delete department
 const handleDeleteDepartment = async (id) => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   try {
-    await axios.delete(`http://localhost:3001/departments/${id}`);
+    await axios.delete(`${apiUrl}/departments/${id}`);
     fetchDepartments(); // Refresh table
   } catch (error) {
     console.error("Error deleting department:", error);
@@ -152,8 +156,9 @@ useEffect(() => {
 }, []);
 
 const fetchCertificates = async () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   try {
-    const response = await axios.get("http://localhost:3001/getcertificates");
+    const response = await axios.get(`${apiUrl}/getcertificates`);
     setCertificateList(response.data);
   } catch (error) {
     console.error("Error fetching certificates:", error);
@@ -186,9 +191,9 @@ const handleAddCertificate = async () => {
     alert("Certificate name cannot be empty or just spaces!");
     return;
   }
-
+  const apiUrl = import.meta.env.VITE_API_URL;
   try {
-    await axios.post("http://localhost:3001/postcertificates", {
+    await axios.post(`${apiUrl}/postcertificates`, {
       CertificateList: trimmedName, // Send trimmed value
     });
     setCertificateName(""); // Clear input field after adding
@@ -206,8 +211,9 @@ const handleDeleteCertificate = async (id) => {
     return;
   }
 
+  const apiUrl = import.meta.env.VITE_API_URL;
   try {
-    await axios.delete(`http://localhost:3001/dropcertificates/${id}`);
+    await axios.delete(`${apiUrl}/dropcertificates/${id}`);
     fetchCertificates(); // Refresh the list
   } catch (error) {
     console.error("Error deleting certificate:", error);
@@ -225,7 +231,8 @@ const [companies, setCompanies] = useState([]);
 
 // Fetch existing companies
 useEffect(() => {
-  axios.get("http://localhost:3001/getCompanies")
+  const apiUrl = import.meta.env.VITE_API_URL;
+  axios.get(`${apiUrl}/getCompanies`)
     .then((res) => setCompanies(res.data))
     .catch((err) => console.error(err));
 }, []);
@@ -238,8 +245,8 @@ const handleInputChange = (e) => {
 // Handle add company
 const handleAddCompany = () => {
   if (!companyName.trim()) return;
-
-  axios.post("http://localhost:3001/addCompany", { companyName })
+  const apiUrl = import.meta.env.VITE_API_URL;
+  axios.post(`${apiUrl}/addCompany`, { companyName })
     .then((res) => {
       setCompanies([...companies, res.data]); // Add new row to UI
       setCompanyName(""); // Clear input
@@ -247,9 +254,14 @@ const handleAddCompany = () => {
     .catch((err) => console.error(err));
 };
 
+
+
+
+
 const handleDelete = (id) => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   axios
-    .delete(`http://localhost:3001/deleteCompany/${id}`)
+    .delete(`${apiUrl}/deleteCompany/${id}`)
     .then(() => {
       setCompanies(companies.filter((company) => company.id !== id));
     })
