@@ -28,8 +28,9 @@ const ViewWorkerForm = () => {
 
   useEffect(() => {
     if (worker.FinNo) {
+      const apiUrl = import.meta.env.VITE_API_URL;
       axios
-        .get(`http://localhost:3001/certificates/${worker.FinNo}`) // Fetch specific FinNo
+        .get(`${apiUrl}/certificates/${worker.FinNo}`) // Fetch specific FinNo
         .then((response) => {
           setCertificates(response.data);
         })
@@ -47,7 +48,8 @@ const ViewWorkerForm = () => {
 
     const fetchWorker = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/addworker/${worker.FinNo}`);
+        const apiUrl = import.meta.env.VITE_API_URL;
+        const response = await axios.get(`${apiUrl}/addworker/${worker.FinNo}`);
         setSelectedWorker(response.data);
       } catch (error) {
         console.error("Error fetching worker details:", error);
@@ -67,8 +69,9 @@ const ViewWorkerForm = () => {
 
   useEffect(() => {
     if (worker.FinNo) {
+      const apiUrl = import.meta.env.VITE_API_URL;
       axios
-        .get(`http://localhost:3001/workerreportfiles/${worker.FinNo}`)
+        .get(`${apiUrl}/workerreportfiles/${worker.FinNo}`)
         .then((res) => setReportData(res.data))
         .catch((err) => console.error("Error fetching worker report data:", err));
     }
@@ -89,12 +92,12 @@ const ViewWorkerForm = () => {
 
 
   const handleView = (filename) => {
-    window.open(`http://localhost:3001/view/workerreportfile/${filename}`, '_blank');
+    window.open(`${apiUrl}/view/workerreportfile/${filename}`, '_blank');
   };
 
   const handleDownload = (filename) => {
     const link = document.createElement('a');
-    link.href = `http://localhost:3001/download/workerreportfile/${filename}`;
+    link.href = `${apiUrl}/download/workerreportfile/${filename}`;
     link.download = filename;
     document.body.appendChild(link);
     link.click();
@@ -109,8 +112,9 @@ const ViewWorkerForm = () => {
 
   useEffect(() => {
     if (worker.FinNo) {
+      const apiUrl = import.meta.env.VITE_API_URL;
       axios
-        .get(`http://localhost:3001/education/${worker.FinNo}`)
+        .get(`${apiUrl}/education/${worker.FinNo}`)
         .then((res) => setEducationData(res.data))
         .catch((err) => console.error("Error fetching education data", err));
     }
